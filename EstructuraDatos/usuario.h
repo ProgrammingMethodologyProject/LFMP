@@ -7,6 +7,6 @@ typedef struct {
     char perfil_usuario[20];
     char usuario[5];
     char contraseña[8];
-}T_Participante;
+}T_usuario;
 
 #endif
