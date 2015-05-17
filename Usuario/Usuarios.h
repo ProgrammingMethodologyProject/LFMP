@@ -18,6 +18,7 @@ typedef T_usuario *nodo;
 //Declaraciones de funciones
 void Leer_user(T_usuario*);
 void Nuevo_user(T_usuario*,int,char,char,char,char);
+void Login_user(T_usuario*);
 
 #endif //_USUARIO_H_
 
