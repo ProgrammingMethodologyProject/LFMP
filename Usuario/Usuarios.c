@@ -56,3 +56,31 @@ void Nuevo_user(T_usuario *head,int id, char nombre, char perfil, char user, cha
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
 }
+
+void Login_user(T_usuario *lista){
+    char user[5],pass[8],p=0,letra;
+    int cont,m=0;
+    printf("\t+----------------------------------------\n");
+    printf("\t|\t* Usuario: ");
+    gets(user);
+    printf("\t|\t* Pass: ");
+    for(cont=0;cont<10;cont++){
+        fflush(stdin);
+        letra=getch();
+        if(letra=='\r'){ // Si presionamos la tecla enter
+            cont=100;
+            continue;
+        }else if(letra=='\b'){ // Si presionamos la tecla return
+            cont=cont-2;
+            printf("\b \b");
+            continue;
+        }else{
+            pass[p]=letra;
+            p++;
+        }
+        putchar('*');
+    }
+    printf("\n\t+----------------------------------------\nChecking...\n");
+    //Comprobar_user(lista,user,pass);
+    printf("Your login was successful\n"); system("pause");
+}
