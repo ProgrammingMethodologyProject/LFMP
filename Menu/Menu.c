@@ -40,5 +40,46 @@ int navegador(int n, int cont){
         printf("\t|\t%c 3 SALIR\t\t\t|\n",c);
         printf("\t+---------------------------------------+\n");
         return 2;
+    }else if(cont==1){
+        char a=' ',b=' ',c=' ',d=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        if(n==3){d='*';}
+        printf("\n\t+---------> MENU ADMINSTRADOR <---------+\n");
+        printf("\t|\t%c 1 EQUIPOS\t\t\t|\n",a);
+        printf("\t|\t%c 2 USUARIOS\t\t\t|\n",b);
+        printf("\t|\t%c 3 CONFIGURACION\t\t|\n",c);
+        printf("\t|\t%c 4 SALIR\t\t\t|\n",d);
+        printf("\t+---------------------------------------+\n");
+        return 3;
+    }else if(cont==2){
+        char a=' ',b=' ',c=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        printf("\n\t+-----------> MENU CRONISTA <-----------+\n");
+        printf("\t|\t%c 1 LISTAR EQUIPOS\t\t|\n",a);
+        printf("\t|\t%c 2 VALORAR EQUIPOS\t\t|\n",b);
+        printf("\t|\t%c 3 SALIR\t\t\t|\n",c);
+        printf("\t+---------------------------------------+\n");
+        return 2;
+    }else if(cont==3){
+        char a=' ',b=' ',c=' ',d=' ',e=' ',f=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        if(n==3){d='*';}
+        if(n==4){e='*';}
+        if(n==5){f='*';}
+        printf("\n\t+---------> MENU PARTICIPANTE <---------+\n");
+        printf("\t|\t%c 1 CREAR PLANTILLA\t\t|\n",a);
+        printf("\t|\t%c 2 CONFIGURAR PLANTILLA\t|\n",b);
+        printf("\t|\t%c 3 LISTAR PLANTILLA\t\t|\n",c);
+        printf("\t|\t%c 4 ELIMINAR PLANTILLA\t\t|\n",d);
+        printf("\t|\t%c 5 RANKING\t\t\t|\n",e);
+        printf("\t|\t%c 6 SALIR\t\t\t|\n",f);
+        printf("\t+---------------------------------------+\n");
+        return 5;
     }
 }
