@@ -18,8 +18,8 @@ void Leer_user(T_usuario *head){
             system("cls");
         }else{printf("Hubo un error, we need to fix it, shut down this programme please\n");}
     }else{
-        while(!feof(fichU)){ //Obtenemos del fichero los datos de los usuarios guardados
-            fscanf(fichU,"%d-",&id); // identificador
+        // Obtenemos del fichero los datos de los usuarios guardados
+        while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
             //printf(":%d",id);
             fgets(nombre,11,fichU); // nombre
             //printf(":%s",nombre);
