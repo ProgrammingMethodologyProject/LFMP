@@ -4,59 +4,59 @@
 #include "Usuarios.h"
 
 //Funcion que recoge todos los datos de los usuarios guardados en el fichero Usuarios.txt
-void Leer_user(T_usuario *head){
+void Leer_user(Lista *lista){
     int id;
-    char nombre[20], perfil[13], user[5], pass[8];
+    char nombre[11], perfil[14], user[6], pass[9];
     FILE *fichU;
     fichU=fopen("Usuarios.txt","r"); //Lee el fichero
     if(!(fichU)){ //Si no existe le fichero, lo crea
-        printf("Creando archivo Usuarios.txt\n...\n");
         fichU=fopen("Usuarios.txt","w");
-        if(fichU){
-            printf("Usuarios.txt creado satisfactoriamente\n");
-            system("pause");
-            system("cls");
-        }else{printf("Hubo un error, we need to fix it, shut down this programme please\n");}
     }else{
         // Obtenemos del fichero los datos de los usuarios guardados
         while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
-            //printf(":%d",id);
+            int u=0;
+            char c[1];
             fgets(nombre,11,fichU); // nombre
-            //printf(":%s",nombre);
             fgetc(fichU); // saltamos el caracter '-'
             fgets(perfil,14,fichU); // perfil
-            //printf(":%s",perfil);
-            fgetc(fichU); // saltamos el caracter '-'
-            fgets(user,6,fichU); // user
-            //printf(":%s",user);
-            fgetc(fichU); // saltamos el caracter '-'
+            hile((c[0]=fgetc(fichU))!='-'){
+                user[u] = c[0];
+                u++;
+            }
+            user[u]='\0';
             fgets(pass,9,fichU); // password
-            //printf(":%s:\n",pass);
-            //printf(":%d:%s:%s:%s:%s\n",id,nombre,perfil,user,pass);
             Nuevo_user(head,id,nombre,perfil,user,pass);
         }
+        fclose(fichU);
     }
-    fclose(fichU);
 }
 
 //Funcion para añadir nuevo usuario (SIN TERMINAR)
-void Nuevo_user(T_usuario *lista,int id, char *nombre, char *perfil, char *user, char *pass){
+void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, char *pass){
     //Creamos un nuevo usuario
     pusuarios nuevo;
     nuevo = (pusuarios)malloc(sizeof(T_usuario));
+    if(nuevo == NULL){
+        fprintf(stderr,"Error de asignacion de memoria");
+        exit(1);
+    }
     nuevo->id = id;
     strcpy(nuevo->nombre,nombre);
     strcpy(nuevo->perfil,perfil);
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
-    if(lista==NULL){
-//        nuevo->siguiente = *lista;
-//        *lista = nuevo;
+    // Si la lista de usuarios esta vacia
+    if(lista_vacia==1){ // SIN TERMINAR
+        nuevo->siguiente = *lista;
+        *lista = nuevo;
     }else{}
 }
 
+// Funcion que nos devuelve 1 si la lista esta vacia o 0 si no
+int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
+
 //Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
-void Alta_user(T_usuario *lista){
+void Alta_user(Lista *lista){
     int nuevo_id;
     char nuevo_nombre[20];
     char nuevo_perfil[13];
@@ -87,7 +87,7 @@ void Alta_user(T_usuario *lista){
 }
 
 //Funcion para acceder con un usuario (SIN TERMINAR)
-void Login_user(T_usuario *lista){
+void Login_user(Lista *lista){
     char user[5],pass[8],p=0,letra;
     int cont,m=0;
     printf("\t+----------------------------------------\n");
@@ -116,6 +116,6 @@ void Login_user(T_usuario *lista){
 }
 
 //Funcion para comprobar si el usuario existe (SIN TERMINAR)
-int Comprobar_user(T_usuario *lista, char *user, char *pass){
+int Comprobar_user(Lista *lista, char *user, char *pass){
 
 }
