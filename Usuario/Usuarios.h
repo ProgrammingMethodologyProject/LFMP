@@ -13,14 +13,15 @@ typedef struct {
 }T_usuario;
 
 typedef T_usuario *pusuarios;
-typedef T_usuario *lista;
+typedef T_usuario *Lista;
 
 //Declaraciones de funciones
-void Leer_user(T_usuario*);
-void Nuevo_user(T_usuario*,int,char,char,char,char);
-void Alta_user(T_usuario*);
-void Login_user(T_usuario*);
-int Comprobar_user(T_usuario*,char*,char*);
+void Leer_user(Lista*);
+int lista_vacia(Lista*);
+void Nuevo_user(Lista*,int,char,char,char,char);
+void Alta_user(Lista*);
+void Login_user(Lista*);
+int Comprobar_user(Lista*,char*,char*);
 
 #endif //_USUARIO_H_
 
