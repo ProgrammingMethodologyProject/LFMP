@@ -3,7 +3,7 @@
 
 typedef struct {
     int identificador_propietario;
-    int identificador;
+    int ident;
     char nombre_equipo[30];
     int presupuesto;
     int puntuacion;
