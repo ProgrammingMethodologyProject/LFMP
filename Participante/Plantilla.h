@@ -4,9 +4,9 @@
 typedef struct {
     int id;
     int ident[3];
-    char nombre_equipo[30];
+    char nombre_plantilla[30];
     int presupuesto;
-    int puntuacion = 0;
+    int puntuacion ;
 }T_plantilla;
 
 T_plantilla *plantilla
