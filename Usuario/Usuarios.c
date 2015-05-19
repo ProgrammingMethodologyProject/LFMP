@@ -46,14 +46,11 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
     // Si la lista de usuarios esta vacia
-    if(lista_vacia==1){ // SIN TERMINAR
+    if(*lista == NULL){ // SIN TERMINAR
         nuevo->siguiente = *lista;
         *lista = nuevo;
     }else{}
 }
-
-// Funcion que nos devuelve 1 si la lista esta vacia o 0 si no
-int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
 
 //Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
 void Alta_user(Lista *lista){
