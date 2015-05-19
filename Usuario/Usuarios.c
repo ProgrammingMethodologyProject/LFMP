@@ -18,7 +18,6 @@ void Leer_user(Lista *lista){
         while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
             int u=0,n=0,p=0;
             char c;
-            printf("id=%d\n",id);
             while((c=fgetc(fichU))!='-'){
                 nombre[n] = c;
                 //nombre = (char*)realloc((nElemN+1),sizeof(char));
@@ -46,34 +45,36 @@ void Leer_user(Lista *lista){
 //Funcion para introducir nuevo usuario (SIN TERMINAR)
 void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, char *pass){
     //Creamos un nuevo usuario
-    pusuarios nuevo, auxiliar;
-    nuevo = (pusuarios)malloc(sizeof(T_usuario));
+    pUsuarios nuevo, anterior;
+    nuevo = (pUsuarios)malloc(sizeof(T_usuario));
     if(nuevo == NULL){
         fprintf(stderr,"Error de asignacion de memoria");
         exit(1);
     }
     nuevo->id = id;
-    strcpy(nuevo->nombre,nombre);
-    strcpy(nuevo->perfil,perfil);
+    nuevo->nombre = nombre;
+    nuevo->perfil = perfil;
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
-    nuevo->siguiente = NULL;
+    //nuevo->siguiente = NULL;
     // Si la lista de usuarios esta vacia
-    if(*lista==NULL){ // SIN TERMINAR
+    if(ListaVacia(*lista)){
+        // Anadimos la lista a continuación del nuevo usuario
         nuevo->siguiente = *lista;
+        // Ahora el comienzo de la lista es nuevo usuario
         *lista = nuevo;
         //printf(":%d:%s:%s:%s:%s:\n",lista->id,lista->nombre,lista->perfil,lista->user,lista->pass);
     }else{
-        auxiliar = *lista;
-        while(auxiliar->siguiente != NULL){
-            auxiliar->siguiente = nuevo;
-            nuevo->siguiente = auxiliar;
+        anterior = *lista;
+        // Avanzamos hasta el último elemento
+        while(anterior->siguiente){
+            anterior = anterior->siguiente;
         }
-        auxiliar->siguiente = *lista;
-        *lista = nuevo;
-        //printf(":%d:%s:%s:%s:%s:\n",lista->id,lista->nombre,lista->perfil,lista->user,lista->pass);
+        //Insertamos nuevo usuario después de anterior
+        nuevo->siguiente = anterior->siguiente;
+        anterior->siguiente = nuevo;
     }
-    //printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
+    printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
 }
 // Funcion que nos devuelve 1 si la lista esta vacia o 0 si no
 //int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
@@ -139,6 +140,11 @@ void Login_user(Lista *lista){
     printf("Usuario o password incorrecto.\n");
 }
  getch();*/
+}
+
+//Funcion
+int ListaVacia(Lista lista){
+    return (lista == NULL);
 }
 
 //Funcion para comprobar si el usuario existe (SIN TERMINAR)
