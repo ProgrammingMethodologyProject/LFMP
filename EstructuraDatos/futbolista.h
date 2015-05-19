@@ -5,7 +5,7 @@ typedef struct {
     int identificador;
     char nombre[20];
     int precio;
-    int valoracion;
+    int valoracion=0;
 }T_Futbolista;
 
 #endif
