@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    int opcion;
+    int salir = 0;
+
+    printf("\n\t+---------> MENU PARTICIPANTE <---------+\n");
+    printf("\t|\t%c 1 CREAR PLANTILLA\t\t|\n");
+    printf("\t|\t%c 2 CONFIGURAR PLANTILLA\t|\n");
+    printf("\t|\t%c 3 LISTAR PLANTILLA\t\t|\n");
+    printf("\t|\t%c 4 ELIMINAR PLANTILLA\t\t|\n");
+    printf("\t|\t%c 5 RANKING\t\t\t|\n");
+    printf("\t|\t%c 6 SALIR\t\t\t|\n");
+    printf("\t+---------------------------------------+\n");
+
+    while(salir == 0)
+    {
+        printf("Introduzca la opcion deseada:");
+        scanf("%d", &opcion);
+
+        switch(opcion)
+        {
+            case 1: //Crear_Plantilla();
+                    break;
+
+            case 2: //Configurar_Plantilla();
+                    break;
+
+            case 3: //Listar_Plantilla();
+                    break;
+
+            case 4: //Eliminar_Plantilla();
+                    break;
+
+            case 5: //Ranking();
+                    break;
+
+            case 6: salir = 1;
+                    break;
+        }
+    }
+
+    system("pause");
+}
