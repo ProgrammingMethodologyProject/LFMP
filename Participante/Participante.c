@@ -101,7 +101,7 @@ void Configurar_Plantilla(T_plantilla *plantilla)
     puts("3.- Añadir jugador a plantilla");
     puts("4.- Eliminar jugador de plantilla");
     puts("5.- Volver");
-    scanf("%d, &a");
+    scanf("%d", &a);
 
     switch(a)
     {
