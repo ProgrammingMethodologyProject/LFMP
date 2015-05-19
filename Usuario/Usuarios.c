@@ -76,8 +76,7 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
     }
     //printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
 }
-// Funcion que nos devuelve 1 si la lista esta vacia o 0 si no
-int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
+
 //Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
 void Alta_user(Lista *lista){
     int nuevo_id;
