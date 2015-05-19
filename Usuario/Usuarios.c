@@ -5,36 +5,48 @@
 
 //Funcion que recoge todos los datos de los usuarios guardados en el fichero Usuarios.txt
 void Leer_user(Lista *lista){
-    int id;
-    char nombre[11], perfil[14], user[6], pass[9];
-    FILE *fichU;
-    fichU=fopen("Usuarios.txt","r"); //Lee el fichero
+    int id,nElemN=2,nElemP=2;
+    char *nombre, *perfil, user[6], pass[9];
+    nombre = (char*)calloc(nElemN,sizeof(char));
+    perfil = (char*)calloc(nElemP,sizeof(char));
+
+    FILE *fichU; fichU=fopen("Usuarios.txt","r"); //Lee el fichero
     if(!(fichU)){ //Si no existe le fichero, lo crea
         fichU=fopen("Usuarios.txt","w");
     }else{
         // Obtenemos del fichero los datos de los usuarios guardados
         while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
-            int u=0;
-            char c[1];
-            fgets(nombre,11,fichU); // nombre
-            fgetc(fichU); // saltamos el caracter '-'
-            fgets(perfil,14,fichU); // perfil
-            hile((c[0]=fgetc(fichU))!='-'){
-                user[u] = c[0];
-                u++;
+            int u=0,n=0,p=0;
+            char c;
+            printf("id=%d\n",id);
+            while((c=fgetc(fichU))!='-'){
+                nombre[n] = c;
+                //nombre = (char*)realloc((nElemN+1),sizeof(char));
+                //nElemN++;
+                n++;
             }
-            user[u]='\0';
+            nombre[n]='\0';
+            while((c=fgetc(fichU))!='-'){
+                perfil[p] = c;
+                //perfil = (char*)realloc((nElemP+1),sizeof(char));
+                //nElemP++;
+                p++;
+            }
+            perfil[p]='\0';
+            fgets(user,6,fichU); // Usuario
+            fgetc(fichU); // Saltamos el caracter '-'
             fgets(pass,9,fichU); // password
-            Nuevo_user(head,id,nombre,perfil,user,pass);
+            //printf(":%d:%s:%s:%s:%s:\n",id,nombre,perfil,user,pass);
+            Nuevo_user(lista,id,nombre,perfil,user,pass);
         }
         fclose(fichU);
     }
 }
 
-//Funcion para añadir nuevo usuario (SIN TERMINAR)
+//Funcion para introducir nuevo usuario (SIN TERMINAR)
 void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, char *pass){
     //Creamos un nuevo usuario
-    pusuarios nuevo;
+    pusuarios nuevo, auxiliar;
     nuevo = (pusuarios)malloc(sizeof(T_usuario));
     if(nuevo == NULL){
         fprintf(stderr,"Error de asignacion de memoria");
@@ -45,13 +57,26 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
     strcpy(nuevo->perfil,perfil);
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
+    nuevo->siguiente = NULL;
     // Si la lista de usuarios esta vacia
-    if(*lista == NULL){ // SIN TERMINAR
+    if(*lista==NULL){ // SIN TERMINAR
         nuevo->siguiente = *lista;
         *lista = nuevo;
-    }else{}
+        //printf(":%d:%s:%s:%s:%s:\n",lista->id,lista->nombre,lista->perfil,lista->user,lista->pass);
+    }else{
+        auxiliar = *lista;
+        while(auxiliar->siguiente != NULL){
+            auxiliar->siguiente = nuevo;
+            nuevo->siguiente = auxiliar;
+        }
+        auxiliar->siguiente = *lista;
+        *lista = nuevo;
+        //printf(":%d:%s:%s:%s:%s:\n",lista->id,lista->nombre,lista->perfil,lista->user,lista->pass);
+    }
+    //printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
 }
-
+// Funcion que nos devuelve 1 si la lista esta vacia o 0 si no
+//int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
 //Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
 void Alta_user(Lista *lista){
     int nuevo_id;
@@ -108,11 +133,15 @@ void Login_user(Lista *lista){
         putchar('*');
     }
     printf("\n\t+----------------------------------------\nChecking...\n");
-    //Comprobar_user(lista,user,pass);
-    printf("Your login was successful\n"); system("pause");
+    /*if((Comprobar_user(Lista,user,pass))==1){
+    printf("Your login was successful\n");
+}else{
+    printf("Usuario o password incorrecto.\n");
+}
+ getch();*/
 }
 
 //Funcion para comprobar si el usuario existe (SIN TERMINAR)
-int Comprobar_user(Lista *lista, char *user, char *pass){
+int Comprobar_user(Lista *lista,char *user, char *pass){
 
 }
