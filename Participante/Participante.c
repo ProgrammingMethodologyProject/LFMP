@@ -44,28 +44,28 @@ void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_eq
 
 //TERMINAR
 void Leer_Plantilla(T_plantilla *plantilla){
-    int id,nElemN=2,nElemP=2,valor_config,puntuacion;
+    int id,nElemN=2,nElemP=2,presupuesto,puntuacion;
     char ident[3], nombre_equipo[30];
     nombre = (char*)calloc(nElemN,sizeof(char));
     perfil = (char*)calloc(nElemP,sizeof(char));
 
-    FILE *fichU; fichU=fopen("Usuarios.txt","r"); //Lee el fichero
-    if(!(fichU)){ //Si no existe le fichero, lo crea
-        fichU=fopen("Usuarios.txt","w");
+    FILE *fichP; fichP=fopen("Plantillas.txt","r"); //Lee el fichero
+    if(!(fichP)){ //Si no existe le fichero, lo crea
+        fichP=fopen("Plantillas.txt","w");
     }else{
         // Obtenemos del fichero los datos de los usuarios guardados
-        while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
+        while((fscanf(fichP,"%d-",&id))!=EOF){ // identificador
             int u=0,n=0,p=0;
             char c;
             printf("id=%d\n",id);
-            while((c=fgetc(fichU))!='-'){
+            while((c=fgetc(fichP))!='-'){
                 nombre[n] = c;
                 //nombre = (char*)realloc((nElemN+1),sizeof(char));
                 //nElemN++;
                 n++;
             }
             nombre[n]='\0';
-            while((c=fgetc(fichU))!='-'){
+            while((c=fgetc(fichP))!='-'){
                 perfil[p] = c;
                 //perfil = (char*)realloc((nElemP+1),sizeof(char));
                 //nElemP++;
@@ -87,9 +87,14 @@ void Configurar_Plantilla(T_plantilla *plantilla)
 
     //listar plantillas
 
-    int a;
+    //participante elige plantilla del listado
+
+    //se muestra el presupuesto disponible
 
     //menu configurar plantilla
+
+    int a;
+
     puts("---- Configurar plantilla ---");
     puts("1.- Lista de jugadores en plantilla");
     puts("2.- Lista de jugadores disponibles");
@@ -110,8 +115,15 @@ void Configurar_Plantilla(T_plantilla *plantilla)
 
 }
 
-void Eliminar_Plantilla()
+void Eliminar_Plantilla(T_plantilla *plantilla)
 {
 
 
 }
+
+void Ranking(T_plantilla *plantilla)
+{
+
+
+}
+
