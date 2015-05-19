@@ -7,7 +7,7 @@
 
 
 //Funcion para crear plantilla (SIN TERMINAR)
-void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_equipo, int valor_config, int puntuacion){
+void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_plantilla, int presupuesto, int puntuacion){
     //Creamos una nueva plantilla
     plantilla nuevo, auxiliar;
     nuevo = (plantilla)malloc(sizeof(T_plantilla));
@@ -17,8 +17,8 @@ void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_eq
     }
     nuevo->id = id;
     strcpy(nuevo->ident,ident);
-    strcpy(nuevo->nombre_equipo,nombre_equipo);
-    strcpy(nuevo->valor_config,valor_config);
+    strcpy(nuevo->nombre_plantilla,nombre_plantilla);
+    strcpy(nuevo->presupuesto,presupuesto);
     strcpy(nuevo->puntuacion,puntuacion);
     nuevo->siguiente = NULL;
     // Si la plantilla esta vacia
@@ -45,7 +45,7 @@ void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_eq
 //TERMINAR
 void Leer_Plantilla(T_plantilla *plantilla){
     int id,nElemN=2,nElemP=2,presupuesto,puntuacion;
-    char ident[3], nombre_equipo[30];
+    char ident[3], nombre_plantilla[30];
     nombre = (char*)calloc(nElemN,sizeof(char));
     perfil = (char*)calloc(nElemP,sizeof(char));
 
@@ -84,8 +84,18 @@ void Leer_Plantilla(T_plantilla *plantilla){
 
 void Configurar_Plantilla(T_plantilla *plantilla)
 {
+    int id;
+    int ident[3];
+    char nombre_plantilla[30];
+    int presupuesto;
+    int puntuacion;
 
     //listar plantillas
+
+    while(plantilla->id == pusuarios->id)
+    {
+        printf("%c", *nombre_plantilla);
+    }
 
     //participante elige plantilla del listado
 
@@ -126,4 +136,3 @@ void Ranking(T_plantilla *plantilla)
 
 
 }
-
