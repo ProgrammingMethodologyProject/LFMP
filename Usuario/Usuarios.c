@@ -45,7 +45,7 @@ void Leer_user(Lista *lista){
 //Funcion para introducir nuevo usuario (SIN TERMINAR)
 void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, char *pass){
     //Creamos un nuevo usuario
-    pUsuarios nuevo, anterior;
+    pUsuarios nuevo, ultimo;
     nuevo = (pUsuarios)malloc(sizeof(T_usuario));
     if(nuevo == NULL){
         fprintf(stderr,"Error de asignacion de memoria");
@@ -65,19 +65,19 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
         *lista = nuevo;
         //printf(":%d:%s:%s:%s:%s:\n",lista->id,lista->nombre,lista->perfil,lista->user,lista->pass);
     }else{
-        anterior = *lista;
+        ultimo = *lista;
         // Avanzamos hasta el último elemento
-        while(anterior->siguiente){
-            anterior = anterior->siguiente;
+        while(ultimo->siguiente){
+            ultimo = ultimo->siguiente;
         }
-        //Insertamos nuevo usuario después de anterior
-        nuevo->siguiente = anterior->siguiente;
-        anterior->siguiente = nuevo;
+        //Insertamos nuevo usuario después del ultimo
+        nuevo->siguiente = ultimo->siguiente;
+        ultimo->siguiente = nuevo;
     }
-    printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
+    //printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
 }
 // Funcion que nos devuelve 1 si la lista esta vacia o 0 si no
-//int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
+int lista_vacia(Lista *lista){ return (*lista == NULL ? 1:0); }
 //Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
 void Alta_user(Lista *lista){
     int nuevo_id;
@@ -112,7 +112,7 @@ void Alta_user(Lista *lista){
 //Funcion para acceder con un usuario (SIN TERMINAR)
 void Login_user(Lista *lista){
     char user[5],pass[8],p=0,letra;
-    int cont,m=0;
+    int cont,m=0,c;
     printf("\t+----------------------------------------\n");
     printf("\t|\t* Usuario: ");
     gets(user);
@@ -134,20 +134,40 @@ void Login_user(Lista *lista){
         putchar('*');
     }
     printf("\n\t+----------------------------------------\nChecking...\n");
-    /*if((Comprobar_user(Lista,user,pass))==1){
-    printf("Your login was successful\n");
-}else{
-    printf("Usuario o password incorrecto.\n");
-}
- getch();*/
+    if((c=Comprobar_user(lista,&user,&pass))){
+        printf("Your login was successful\n");
+        menu(c);
+    }else{
+        printf("Usuario o password incorrecto.\n");
+    }
+ getch();
 }
 
-//Funcion
-int ListaVacia(Lista lista){
-    return (lista == NULL);
-}
+//Funcion que comprueba si la lista esta vacia
+int ListaVacia(Lista lista){ return (lista == NULL); }
 
 //Funcion para comprobar si el usuario existe (SIN TERMINAR)
 int Comprobar_user(Lista *lista,char *user, char *pass){
-
+    int check=0;
+    char *admin = "administrador", *croni = "cronista", *parti = "participante";
+    pUsuarios indice;
+    indice = *lista;
+    while(indice){
+        if(strcmp(indice->user,user)){
+            if(strcmp(indice->pass,pass)){
+                if( strcmp(indice->perfil,admin)){ check = 1;
+                }else if(strcmp(indice->perfil,croni)){ check = 2;
+                }else{ check = 3; }
+            }
+        }
+        if(indice->siguiente == NULL){
+            if(check){
+                return check;
+            }else{
+                return 0;
+            }
+        }else{
+            indice = indice->siguiente;
+        }
+    }
 }
