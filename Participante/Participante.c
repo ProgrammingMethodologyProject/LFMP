@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>>
 #include "configuracion.h"
 #include "jugadores_plantillas.h"
 #include "plantilla.h"
 
 
 //Funcion para crear plantilla (SIN TERMINAR)
-void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_plantilla, int presupuesto, int puntuacion){
+void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_plantilla, int presupuesto, int puntuacion)
+{
     //Creamos una nueva plantilla
     plantilla nuevo, auxiliar;
     nuevo = (plantilla)malloc(sizeof(T_plantilla));
@@ -44,6 +46,7 @@ void Crear_Plantilla(T_plantilla *plantilla,int id, char *ident, char *nombre_pl
 
 //TERMINAR
 void Leer_Plantilla(T_plantilla *plantilla){
+
     int id,nElemN=2,nElemP=2,presupuesto,puntuacion;
     char ident[3], nombre_plantilla[30];
     nombre = (char*)calloc(nElemN,sizeof(char));
@@ -84,22 +87,17 @@ void Leer_Plantilla(T_plantilla *plantilla){
 
 void Configurar_Plantilla(T_plantilla *plantilla)
 {
-    int id;
-    int ident[3];
-    char nombre_plantilla[30];
-    int presupuesto;
-    int puntuacion;
+    int a;
 
     //listar plantillas
 
-    while(plantilla->id == pusuarios->id)
-    {
-        printf("%c", *nombre_plantilla);
-    }
+    Listar_Plantilla();
 
     //participante elige plantilla del listado
 
-    //se muestra el presupuesto disponible
+    puts("Introduzca codigo plantilla");
+    scanf("%d", &a);
+    printf("Presupuesto: %d", plantilla->presupuesto); //se muestra el presupuesto disponible
 
     //menu configurar plantilla
 
@@ -115,24 +113,84 @@ void Configurar_Plantilla(T_plantilla *plantilla)
 
     switch(a)
     {
-        case 1: //mostrar jugadores de la plantilla junto a su valoracion
-        case 2: //Lista de futbolistas y su precio
-        case 3: //Añadir futbolista a plantilla
-        case 4: //Eliminar jugador de la plantillla (incrementar presupuesto participante)
+        case 1: Jugadores_Plantilla();break;
+        case 2: Jugadores_Disp();break;
+        case 3: Añadir_Jugador();break;
+        case 4: Eliminar_Jugador();break;
         case 5: exit();break;
         default: puts("Opcion incorrecta");break;
     }
+}
+
+void Listar_Plantilla(T_plantilla *plantilla)
+{
+    int i;
+    char str[35];
+
+    printf("\nLista de plantillas:\n");
+    for(i=0 ; i<plantilla.ident ; i++)
+    {
+        sprintf(str, "%02d-%s", plantilla[i].ident, plantilla[i].nombre_plantilla);
+        printf("%s\n", str);
+    }
+    printf("\n");
 
 }
 
-void Eliminar_Plantilla(T_plantilla *plantilla)
+//lista jugadores en plantilla
+void Jugadores_Plantilla(T_plantilla *plantilla)
 {
 
+
+}
+
+//lista jugadores disponibles
+void Jugadores_Disp(T_plantilla *plantilla)
+{
+
+}
+
+//añadir jugador a plantilla
+void Añadir_Jugador(T_plantilla *plantilla, T_Futbolista *fut)
+{
+
+}
+
+//eliminar
+void Eliminar_Jugador(T_plantilla *plantilla)
+{
+
+}
+
+
+
+void Eliminar_Plantilla(T_plantilla *plantilla)
+{
+    int cod,i,aux;
+
+    Listar_Plantilla();
+
+    puts("Introduzca codigo de la plantilla a eliminar");
+    scanf("%d", &cod);
+    fflush(stdin);
+
+    for(i=0 ; i<tam ; i++){
+        if(plantilla[i].ident == cod) {
+            aux = 1;
+            i++;
+        }
+        if(aux == 1)
+            plantilla[i-1] = plantilla[i];
+        else
+            plantilla[i] = plantilla[i];
+    }
+    if(aux==1){
+        plantilla = (T_plantilla *) realloc(plantilla, (--ident)*sizeof(T_plantilla));
+    }
 
 }
 
 void Ranking(T_plantilla *plantilla)
 {
-
 
 }
