@@ -141,11 +141,7 @@ void Login_user(Lista *lista){
         printf("Your login was successful\n");
         getch();
         system("cls");
-        switch(menu(c)){
-            case 1: printf("1\n"); system("pause"); break;
-            case 2: printf("2\n"); system("pause"); break;
-            case 3: printf("3\n"); system("pause"); break;
-        }
+        return c;
     }else{
         printf("Usuario o password incorrecto.\n");
         getch();
