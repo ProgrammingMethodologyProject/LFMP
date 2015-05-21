@@ -56,48 +56,49 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
     nuevo->perfil = perfil;
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
-    //nuevo->siguiente = NULL;
     // Si la lista de usuarios esta vacia
     if(ListaVacia(*lista)){
         // Anadimos la lista a continuación del nuevo usuario
         nuevo->siguiente = *lista;
         // Ahora el comienzo de la lista es nuevo usuario
         *lista = nuevo;
-        //printf(":%d:%s:%s:%s:%s:\n",lista->id,lista->nombre,lista->perfil,lista->user,lista->pass);
     }else{
         ultimo = *lista;
         // Avanzamos hasta el último elemento
-        while(ultimo->siguiente){
+        while(ultimo->siguiente != NULL){
             ultimo = ultimo->siguiente;
         }
         //Insertamos nuevo usuario después del ultimo
         nuevo->siguiente = ultimo->siguiente;
         ultimo->siguiente = nuevo;
     }
-    //printf(":%d:%s:%s:%s:%s:\n",nuevo->id,nuevo->nombre,nuevo->perfil,nuevo->user,nuevo->pass);
 }
 
 //Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
 void Alta_user(Lista *lista){
-    int nuevo_id;
+    int nuevo_id, aux=1;
     char nuevo_nombre[20];
-    char nuevo_perfil[13];
+    char nuevo_perfil[13] = "participante";
     char nuevo_user[5];
     char nuevo_pass[8];
-    printf("Alta usuario:\n");
-    puts("Identificador: ");
-    fflush(stdin); //Elimina basura
-    scanf("%d",&nuevo_id);
-    if(nuevo_id>99){
-        printf("\tIdentificador introducido demasiado grande.\n");
-        exit(0);
+    
+    pUsuarios auxiliar;
+    auxiliar = *lista;
+    if(auxiliar != NULL){ // Recorremos los usuarios existentes hasta el ultimo y devuelva el proximo id
+        aux++;
+        while(auxiliar->siguiente != NULL){ auxiliar = auxiliar->siguiente; aux++; }
     }
+    
+    printf("Alta usuario:\n");
+    puts("Identificador: %d\n",aux);
+    nuevo_id = aux;
     puts("Nombre(max 20): ");
     fflush(stdin); //Elimina basura
     gets(nuevo_nombre);
-    puts("Perfil(administrador,cronista,participante): ");
-    fflush(stdin);
-    gets(nuevo_perfil);
+    if(strlen(nuevo_nombre)>20){
+        printf("\tNombre introducido demasiado largo.\n");
+        exit(0);
+    }
     puts("Usuario(5 caracteres): ");
     fflush(stdin);
     gets(nuevo_user);
@@ -106,25 +107,28 @@ void Alta_user(Lista *lista){
     gets(nuevo_pass);
     Nuevo_user(lista,nuevo_id,nuevo_nombre,nuevo_perfil,nuevo_user,nuevo_pass);
     printf("\nAlta finalizada.\n");
+    getch();
 }
 
 //Funcion para acceder con un usuario (SIN TERMINAR)
 void Login_user(Lista *lista){
     char user[5],pass[8],p=0,letra;
-    int cont,m=0,c;
+    int cont=1,m=0,c;
     printf("\t+----------------------------------------\n");
     printf("\t|\t* Usuario: ");
     gets(user);
     printf("\t|\t* Pass: ");
-    for(cont=0;cont<10;cont++){
+    while(cont){
         fflush(stdin);
         letra=getch();
         if(letra=='\r'){ // Si presionamos la tecla enter
-            cont=100;
+            cont=0;
             continue;
         }else if(letra=='\b'){ // Si presionamos la tecla return
-            cont=cont-2;
-            printf("\b \b");
+            if(p>0){
+                p--;
+                printf("\b \b");
+            }
             continue;
         }else{
             pass[p]=letra;
@@ -135,11 +139,17 @@ void Login_user(Lista *lista){
     printf("\n\t+----------------------------------------\nChecking...\n");
     if((c=Comprobar_user(lista,&user,&pass))){
         printf("Your login was successful\n");
-        menu(c);
+        getch();
+        system("cls");
+        switch(menu(c)){
+            case 1: printf("1\n"); system("pause"); break;
+            case 2: printf("2\n"); system("pause"); break;
+            case 3: printf("3\n"); system("pause"); break;
+        }
     }else{
         printf("Usuario o password incorrecto.\n");
+        getch();
     }
- getch();
 }
 
 //Funcion que comprueba si la lista esta vacia
@@ -152,10 +162,10 @@ int Comprobar_user(Lista *lista,char *user, char *pass){
     pUsuarios indice;
     indice = *lista;
     while(indice){
-        if(strcmp(indice->user,user)){
-            if(strcmp(indice->pass,pass)){
-                if( strcmp(indice->perfil,admin)){ check = 1;
-                }else if(strcmp(indice->perfil,croni)){ check = 2;
+        if((strcmp(indice->user,user))==0){
+            if((strcmp(indice->pass,pass))==0){
+                if((strcmp(indice->perfil,admin))==0){ check = 1;
+                }else if((strcmp(indice->perfil,croni)){ check = 2;
                 }else{ check = 3; }
             }
         }
