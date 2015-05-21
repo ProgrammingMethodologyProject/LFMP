@@ -20,7 +20,7 @@ void Leer_user(Lista*);
 int ListaVacia(Lista);
 void Nuevo_user(Lista*,int,char*,char*,char*,char*);
 void Alta_user(Lista*);
-void Login_user(Lista*);
+int Login_user(Lista*);
 int Comprobar_user(Lista*,char*,char*);
 
 #endif //_USUARIO_H_
