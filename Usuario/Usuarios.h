@@ -22,6 +22,7 @@ void Nuevo_user(Lista*,int,char*,char*,char*,char*);
 void Alta_user(Lista*);
 int Login_user(Lista*);
 int Comprobar_user(Lista*,char*,char*);
+void mostrar_user(Lista*);
 
 #endif //_USUARIO_H_
 
