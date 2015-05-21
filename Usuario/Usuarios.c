@@ -42,7 +42,7 @@ void Leer_user(Lista *lista){
     }
 }
 
-//Funcion para introducir nuevo usuario (SIN TERMINAR)
+//Funcion para introducir nuevo usuario
 void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, char *pass){
     //Creamos un nuevo usuario
     pUsuarios nuevo, ultimo;
@@ -74,7 +74,7 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
     }
 }
 
-//Funcion para dar de alta un nuevo usuario (SIN TERMINAR)
+//Funcion para dar de alta un nuevo usuario
 void Alta_user(Lista *lista){
     int nuevo_id, aux=1;
     char nuevo_nombre[20];
@@ -90,7 +90,7 @@ void Alta_user(Lista *lista){
     }
     
     printf("Alta usuario:\n");
-    puts("Identificador: %d\n",aux);
+    printf("Identificador: %d\n",aux);
     nuevo_id = aux;
     puts("Nombre(max 20): ");
     fflush(stdin); //Elimina basura
@@ -110,7 +110,7 @@ void Alta_user(Lista *lista){
     getch();
 }
 
-//Funcion para acceder con un usuario (SIN TERMINAR)
+//Funcion para acceder con un usuario
 void Login_user(Lista *lista){
     char user[5],pass[8],p=0,letra;
     int cont=1,m=0,c;
@@ -151,7 +151,7 @@ void Login_user(Lista *lista){
 //Funcion que comprueba si la lista esta vacia
 int ListaVacia(Lista lista){ return (lista == NULL); }
 
-//Funcion para comprobar si el usuario existe (SIN TERMINAR)
+//Funcion para comprobar si el usuario existe
 int Comprobar_user(Lista *lista,char *user, char *pass){
     int check=0;
     char *admin = "administrador", *croni = "cronista", *parti = "participante";
@@ -173,6 +173,29 @@ int Comprobar_user(Lista *lista,char *user, char *pass){
             }
         }else{
             indice = indice->siguiente;
+        }
+    }
+}
+
+//Funcion para listar los usuarios existentes
+void mostrar_user(Lista *lista){
+    pUsuarios auxiliar;
+    auxiliar = (pUsuarios)malloc(sizeof(T_usuario));
+    auxiliar = *lista;
+    printf("-%s-\n",auxiliar->nombre);
+    // Si la lista de usuarios esta vacia
+    if(ListaVacia(auxiliar)){
+        printf("Lista de usuarios vacia\n");
+    }else{
+        printf("Lista de usuarios:\n");
+        // Avanzamos hasta el último elemento
+        while(auxiliar){
+            if(auxiliar->id <10){
+                printf("0%d-%s-%s-%s-%s\n",auxiliar->id,auxiliar->nombre,auxiliar->perfil,auxiliar->user,auxiliar->pass);
+            }else{
+                printf("%d-%s-%s-%s-%s\n",auxiliar->id,auxiliar->nombre,auxiliar->perfil,auxiliar->user,auxiliar->pass);
+            }
+            auxiliar = auxiliar->siguiente;
         }
     }
 }
