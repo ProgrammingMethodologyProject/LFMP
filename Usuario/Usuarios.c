@@ -178,7 +178,7 @@ int Comprobar_user(Lista *lista,char *user, char *pass){
 }
 
 //Funcion para listar los usuarios existentes
-void mostrar_user(Lista *lista){
+void Listar_user(Lista *lista){
     pUsuarios auxiliar;
     auxiliar = (pUsuarios)malloc(sizeof(T_usuario));
     auxiliar = *lista;
