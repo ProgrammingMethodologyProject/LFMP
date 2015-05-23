@@ -27,15 +27,15 @@ int main(){
             op = menu(op); system("cls");
             while(op == 1){ // Equipos
                 switch(menu(4)){
-                    case 1: // Listar Equipos
+                    case 1: Listar_equipo(l_equipos);// Listar Equipos
                             getch(); system("cls"); op = 1; break;
-                    case 2: // Modificar equipos
+                    case 2: Localizar_equipo(&l_equipos);// Modificar equipos
                             getch(); system("cls"); op = 1; break;
-                    case 3: // Agregar equipos
+                    case 3: Alta_equipo(&l_equipos);// Agregar equipos
                             getch(); system("cls"); op = 1; break;
-                    case 4: // Eliminar equipos
+                    case 4: Eliminar_equipo(&l_equipos);// Eliminar equipos
                             getch(); system("cls"); op = 1; break;
-                    case 5: S=0; system("cls"); op = 0; break;
+                    case 5: system("cls"); op = 0; break;
                 }
             }
             while(op == 2){ // Usuarios
