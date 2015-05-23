@@ -15,5 +15,7 @@ typedef T_equipo *ListaE;
 //Declaraciones de funciones
 void Leer_equipo(ListaE*);
 void Nuevo_equipo(ListaE*,int,char*);
+int ListaEVacia(ListaE);
+void Listar_equipo(ListaE);
 
 #endif //_EQUIPOS_H_
