@@ -60,7 +60,7 @@ void Nuevo_user(ListaU *lista,int id, char *nombre, char *perfil, char *user, ch
     strcpy(nuevo->user,user);
     strcpy(nuevo->pass,pass);
     // Si la lista de usuarios esta vacia
-    if(ListaVacia(*lista)){
+    if(ListaUVacia(*lista)){
         // Anadimos la lista a continuación del nuevo usuario
         nuevo->siguiente = *lista;
         // Ahora el comienzo de la lista es nuevo usuario
@@ -155,7 +155,7 @@ void Login_user(ListaU *lista){
 }
 
 //Funcion que comprueba si la lista esta vacia
-int ListaVacia(ListaU lista){ return (lista == NULL); }
+int ListaUVacia(ListaU lista){ return (lista == NULL); }
 
 //Funcion para comprobar si el usuario existe
 int Comprobar_user(ListaU *lista,char *user, char *pass){
@@ -192,7 +192,7 @@ void Listar_user(ListaU lista){
     pUsuarios auxiliar;
     auxiliar = lista;
     // Si la lista de usuarios esta vacia
-    if(ListaVacia(lista)){
+    if(ListaUVacia(lista)){
         printf("-Lista de usuarios vacia\n");
     }else{
         printf("-Lista de usuarios:\n");
@@ -217,7 +217,7 @@ void Localizar_user(ListaU *lista){
     if(auxiliar  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
     auxiliar = *lista;
     // Si la lista de usuarios esta vacia
-    if(ListaVacia(auxiliar)){
+    if(ListaUVacia(auxiliar)){
         printf("-Lista de usuarios vacia\n");
     }else{
         printf("-Numero identificador del usuario que quieres modificar: ");
