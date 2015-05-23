@@ -1,41 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "Usuarios.h"
 
 //Funcion que recoge todos los datos de los usuarios guardados en el fichero Usuarios.txt
-void Leer_user(Lista *lista){
-    int id,nElemN=2,nElemP=2;
-    char *nombre, *perfil, user[6], pass[9];
-    nombre = (char*)calloc(nElemN,sizeof(char));
-    perfil = (char*)calloc(nElemP,sizeof(char));
-
+void Leer_user(ListaU *lista){
+    int id;
+    char *nombre, *perfil, user[6], pass[9], *admin = "administrador", *croni = "cronista", *parti = "participante";
+    nombre = (char*)calloc(20,sizeof(char));
+    
     FILE *fichU; fichU=fopen("Usuarios.txt","r"); //Lee el fichero
     if(!(fichU)){ //Si no existe le fichero, lo crea
         fichU=fopen("Usuarios.txt","w");
     }else{
         // Obtenemos del fichero los datos de los usuarios guardados
         while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
-            int u=0,n=0,p=0;
+            int n=0;
             char c;
             while((c=fgetc(fichU))!='-'){
                 nombre[n] = c;
-                //nombre = (char*)realloc((nElemN+1),sizeof(char));
-                //nElemN++;
                 n++;
             }
             nombre[n]='\0';
-            while((c=fgetc(fichU))!='-'){
-                perfil[p] = c;
-                //perfil = (char*)realloc((nElemP+1),sizeof(char));
-                //nElemP++;
-                p++;
+            c=fgetc(fichU);
+            if(c=='a'){
+                perfil = admin;
+                while((c=fgetc(fichU))!='-'){}
             }
-            perfil[p]='\0';
+            if(c=='c'){
+                perfil = croni;
+                while((c=fgetc(fichU))!='-'){}
+            }
+            if(c=='p'){
+                perfil = parti;
+                while((c=fgetc(fichU))!='-'){}
+            }
             fgets(user,6,fichU); // Usuario
             fgetc(fichU); // Saltamos el caracter '-'
             fgets(pass,9,fichU); // password
-            //printf(":%d:%s:%s:%s:%s:\n",id,nombre,perfil,user,pass);
             Nuevo_user(lista,id,nombre,perfil,user,pass);
         }
         fclose(fichU);
@@ -43,7 +46,7 @@ void Leer_user(Lista *lista){
 }
 
 //Funcion para introducir nuevo usuario
-void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, char *pass){
+void Nuevo_user(ListaU *lista,int id, char *nombre, char *perfil, char *user, char *pass){
     //Creamos un nuevo usuario
     pUsuarios nuevo, ultimo;
     nuevo = (pUsuarios)malloc(sizeof(T_usuario));
@@ -75,7 +78,7 @@ void Nuevo_user(Lista *lista,int id, char *nombre, char *perfil, char *user, cha
 }
 
 //Funcion para dar de alta un nuevo usuario
-void Alta_user(Lista *lista){
+void Alta_user(ListaU *lista){
     int nuevo_id, aux=1;
     char nuevo_nombre[20];
     char nuevo_perfil[13] = "participante";
@@ -83,26 +86,28 @@ void Alta_user(Lista *lista){
     char nuevo_pass[8];
     
     pUsuarios auxiliar;
+    auxiliar = (pUsuarios)malloc(sizeof(T_usuario));
+    if(auxiliar  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
     auxiliar = *lista;
     if(auxiliar != NULL){ // Recorremos los usuarios existentes hasta el ultimo y devuelva el proximo id
         aux++;
         while(auxiliar->siguiente != NULL){ auxiliar = auxiliar->siguiente; aux++; }
     }
     
-    printf("Alta usuario:\n");
-    printf("Identificador: %d\n",aux);
+    printf("-Alta usuario:\n");
+    printf("-Identificador: %d\n",aux);
     nuevo_id = aux;
-    puts("Nombre(max 20): ");
+    puts("-Nombre(max 20): ");
     fflush(stdin); //Elimina basura
     gets(nuevo_nombre);
     if(strlen(nuevo_nombre)>20){
         printf("\tNombre introducido demasiado largo.\n");
         exit(0);
     }
-    puts("Usuario(5 caracteres): ");
+    puts("-Usuario(5 caracteres): ");
     fflush(stdin);
     gets(nuevo_user);
-    puts("Password(8 caracteres): ");
+    puts("-Password(8 caracteres): ");
     fflush(stdin);
     gets(nuevo_pass);
     Nuevo_user(lista,nuevo_id,nuevo_nombre,nuevo_perfil,nuevo_user,nuevo_pass);
@@ -111,9 +116,9 @@ void Alta_user(Lista *lista){
 }
 
 //Funcion para acceder con un usuario
-void Login_user(Lista *lista){
-    char user[5],pass[8],p=0,letra;
-    int cont=1,m=0,c;
+void Login_user(ListaU *lista){
+    char user[6],pass[9],p=0,letra;
+    int cont=1,c;
     printf("\t+----------------------------------------\n");
     printf("\t|\t* Usuario: ");
     gets(user);
@@ -136,6 +141,7 @@ void Login_user(Lista *lista){
         }
         putchar('*');
     }
+    pass[p]='\0';
     printf("\n\t+----------------------------------------\nChecking...\n");
     if((c=Comprobar_user(lista,&user,&pass))){
         printf("Your login was successful\n");
@@ -144,19 +150,23 @@ void Login_user(Lista *lista){
         return c;
     }else{
         printf("Usuario o password incorrecto.\n");
-        getch();
+        return 0;
     }
 }
 
 //Funcion que comprueba si la lista esta vacia
-int ListaVacia(Lista lista){ return (lista == NULL); }
+int ListaVacia(ListaU lista){ return (lista == NULL); }
 
 //Funcion para comprobar si el usuario existe
-int Comprobar_user(Lista *lista,char *user, char *pass){
+int Comprobar_user(ListaU *lista,char *user, char *pass){
     int check=0;
-    char *admin = "administrador", *croni = "cronista", *parti = "participante";
+    char *admin = "administrador", *croni = "cronista";
+    
     pUsuarios indice;
+    indice = (pUsuarios)malloc(sizeof(T_usuario));
+    if(indice  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
     indice = *lista;
+    
     while(indice){
         if((strcmp(indice->user,user))==0){
             if((strcmp(indice->pass,pass))==0){
@@ -178,16 +188,14 @@ int Comprobar_user(Lista *lista,char *user, char *pass){
 }
 
 //Funcion para listar los usuarios existentes
-void Listar_user(Lista *lista){
+void Listar_user(ListaU lista){
     pUsuarios auxiliar;
-    auxiliar = (pUsuarios)malloc(sizeof(T_usuario));
-    auxiliar = *lista;
-    printf("-%s-\n",auxiliar->nombre);
+    auxiliar = lista;
     // Si la lista de usuarios esta vacia
-    if(ListaVacia(auxiliar)){
-        printf("Lista de usuarios vacia\n");
+    if(ListaVacia(lista)){
+        printf("-Lista de usuarios vacia\n");
     }else{
-        printf("Lista de usuarios:\n");
+        printf("-Lista de usuarios:\n");
         // Avanzamos hasta el último elemento
         while(auxiliar){
             if(auxiliar->id <10){
@@ -197,5 +205,87 @@ void Listar_user(Lista *lista){
             }
             auxiliar = auxiliar->siguiente;
         }
+    }
+}
+
+//Funcion para localizar un usuario existentes
+void Localizar_user(ListaU *lista){
+    int id,op;
+    char *admin = "administrador", *croni = "cronista", *parti = "participante";
+    pUsuarios auxiliar;
+    auxiliar = (pUsuarios)malloc(sizeof(T_usuario));
+    if(auxiliar  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
+    auxiliar = *lista;
+    // Si la lista de usuarios esta vacia
+    if(ListaVacia(auxiliar)){
+        printf("-Lista de usuarios vacia\n");
+    }else{
+        printf("-Numero identificador del usuario que quieres modificar: ");
+        fflush(stdin); // Elimina basura
+        scanf("%d",&id);
+        // Avanzamos hasta el último elemento
+        while(auxiliar && auxiliar->id != id){ auxiliar = auxiliar->siguiente; }
+        if(auxiliar){
+            printf("%d-%s-%s-%s-%s\n",auxiliar->id,auxiliar->nombre,auxiliar->perfil,auxiliar->user,auxiliar->pass);
+            fflush(stdin);
+            printf("-Modificar nombre?(1 si/2 no): ");
+            scanf("%d",&op);
+            if(op == 1){
+                printf("-Nombre(max 20): ");
+                gets(auxiliar->nombre);
+            }
+            printf("-Modificar perfil?(1 si/2 no): ");
+            scanf("%d",&op);
+            if(op == 1){
+                printf("-Perfil (1 administrador/2 cronista/3 participante): ");
+                fflush(stdin);
+                scanf("%d",&op);
+                if(op == 1){ auxiliar->perfil = admin; }
+                if(op == 2){ auxiliar->perfil = croni; }
+                if(op == 3){ auxiliar->perfil = parti; }
+            }
+            printf("-Modificar usuario?(1 si/2 no): ");
+            scanf("%d",&op);
+            if(op == 1){
+                printf("-Usuario(5 caracteres): ");
+                fflush(stdin);
+                gets(auxiliar->user);
+            }
+            printf("-Modificar password?(1 si/2 no): ");
+            scanf("%d",&op);
+            if(op == 1){
+                printf("-Password(8 caracteres): ");
+                fflush(stdin);
+                gets(auxiliar->pass);
+            }
+            printf("-Usuario modificado:\n");
+            printf("%d-%s-%s-%s-%s\n",auxiliar->id,auxiliar->nombre,auxiliar->perfil,auxiliar->user,auxiliar->pass);
+        }
+    }
+}
+
+void Eliminar_user(ListaU *lista){
+    int id;
+    pUsuarios anterior, auxiliar;
+    auxiliar = *lista;
+    anterior = NULL;
+    printf("-Eliminar usuario:\n-Introduce identificador del usuario: ");
+    scanf("%d",&id);
+    while(auxiliar && auxiliar->id < id){
+        anterior = auxiliar;
+        auxiliar = auxiliar->siguiente;
+    }
+    if(!auxiliar || auxiliar->id != id){
+        printf("-Usuario no existe\n");
+    }else{
+        // Eliminamos el usuario
+        if(!anterior){
+            // 1er elemento
+            *lista = auxiliar->siguiente;
+        }else{
+            anterior->siguiente = auxiliar->siguiente;
+        }
+        free(auxiliar);
+        printf("-Usuario eliminado: ");
     }
 }
