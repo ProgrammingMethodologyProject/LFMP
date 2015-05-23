@@ -17,5 +17,7 @@ void Leer_equipo(ListaE*);
 void Nuevo_equipo(ListaE*,int,char*);
 int ListaEVacia(ListaE);
 void Listar_equipo(ListaE);
+void Localizar_equipo(ListaE*);
+void Eliminar_equipo(ListaE*);
 
 #endif //_EQUIPOS_H_
