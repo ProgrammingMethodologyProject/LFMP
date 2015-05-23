@@ -74,3 +74,60 @@ void Listar_equipo(ListaE lista){
         }
     }
 }
+
+//Funcion para localizar un equipo existente
+void Localizar_equipo(ListaE *lista){
+    int id,op;
+    pEquipos auxiliar;
+    auxiliar = (pEquipos)malloc(sizeof(T_equipo));
+    if(auxiliar  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
+    auxiliar = *lista;
+    // Si la lista de equipos esta vacia
+    if(ListaEVacia(auxiliar)){
+        printf("-Lista de equipos vacia\n");
+    }else{
+        printf("-Numero identificador del equipo que quieres modificar: ");
+        fflush(stdin); // Elimina basura
+        scanf("%d",&id);
+        // Avanzamos hasta el último elemento
+        while(auxiliar && auxiliar->id != id){ auxiliar = auxiliar->siguiente; }
+        if(auxiliar){
+            printf("%d-%s\n",auxiliar->id,auxiliar->nombre);
+            fflush(stdin);
+            printf("-Modificar nombre?(1 si/2 no): ");
+            scanf("%d",&op);
+            if(op == 1){
+                printf("-Nombre(max 20): ");
+                gets(auxiliar->nombre);
+            }
+            printf("-Equipo modificado:\n");
+            printf("%d-%s\n",auxiliar->id,auxiliar->nombre);
+        }
+}
+
+//Funcion para eliminar un usuario de la lista
+void Eliminar_equipo(ListaE *lista){
+    int id;
+    pEquipos anterior, auxiliar;
+    auxiliar = *lista;
+    anterior = NULL;
+    printf("-Eliminar equipo:\n-Introduce identificador del equipo: ");
+    scanf("%d",&id);
+    while(auxiliar && auxiliar->id < id){
+        anterior = auxiliar;
+        auxiliar = auxiliar->siguiente;
+    }
+    if(!auxiliar || auxiliar->id != id){
+        printf("-Equipo no existe\n");
+    }else{
+        // Eliminamos el equipo
+        if(!anterior){
+            // 1er elemento
+            *lista = auxiliar->siguiente;
+        }else{
+            anterior->siguiente = auxiliar->siguiente;
+        }
+        free(auxiliar);
+        printf("-Equipo eliminado: ");
+    }
+}
