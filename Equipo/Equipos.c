@@ -12,7 +12,7 @@ void Leer_equipo(ListaE *lista){
 
     FILE *fichE; fichE=fopen("Equipos.txt","r"); // Lee el fichero
     if(!(fichE)){ // Si no existe le fichero, lo crea
-        fichU=fopen("Usuarios.txt","w");
+        fichU=fopen("Equipos.txt","w");
     }else{
         // Obtenemos del fichero los datos de los usuarios guardados
         while((fscanf(fichE,"%d-",&id))!=EOF){ // identificador
