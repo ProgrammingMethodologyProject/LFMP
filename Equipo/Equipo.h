@@ -2,7 +2,7 @@
 #define _EQUIPOS_H_
 
 
-//Estructuras para almacenar los datos de los Usuarios
+//Estructuras para almacenar los datos de los Equipos
 typedef struct {
     int id;
     char *nombre;
