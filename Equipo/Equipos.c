@@ -15,16 +15,16 @@ void Leer_equipo(ListaE *lista){
         fichU=fopen("Usuarios.txt","w");
     }else{
         // Obtenemos del fichero los datos de los usuarios guardados
-        while((fscanf(fichU,"%d-",&id))!=EOF){ // identificador
+        while((fscanf(fichE,"%d-",&id))!=EOF){ // identificador
             fgets(nombre,21,fichE); // nombre
             printf(":%d:%s:\n",id,nombre);
             Nuevo_user(lista,id,nombre,perfil,user,pass);
         }
-        fclose(fichU);
+        fclose(fichE);
     }
 }
 
 //Funcion para introducir nuevo equipo
-void Nuevo_equipo(ListaE *,int,char *,char *,char *,char *){
+void Nuevo_equipo(ListaE *lista,int id,char *nombre){
 
 }
