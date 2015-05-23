@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "Usuarios.h"
+#include "Equipos.h"
 
 int main(){
-    Lista l_usuarios=NULL; // Indice para el listado de usuarios
+    ListaE l_equipos=NULL; // Indice para el listado de equipos
+    ListaU l_usuarios=NULL; // Indice para el listado de usuarios
+    Leer_equipo(&l_equipos); //Funcion que recorre el fichero Equipos.txt
     Leer_user(&l_usuarios); //Funcion que recorre el fichero Usuarios.txt
     int S=1;
     while(S){
