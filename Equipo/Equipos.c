@@ -35,7 +35,7 @@ void Nuevo_equipo(ListaE *lista,int id,char *nombre){
     nuevo->nombre = nombre;
     printf(":%d:%s:\n",nuevo->id,nuevo->nombre);
     // Si la lista de usuarios esta vacia
-    if(ListaVacia(*lista)){
+    if(ListaEVacia(*lista)){
         // Anadimos la lista a continuación del nuevo equipo
         nuevo->siguiente = *lista;
         // Ahora el comienzo de la lista es nuevo equipo
@@ -49,5 +49,28 @@ void Nuevo_equipo(ListaE *lista,int id,char *nombre){
         // Insertamos nuevo equipo después del ultimo
         nuevo->siguiente = ultimo->siguiente;
         ultimo->siguiente = nuevo;
+    }
+}
+
+//Funcion que comprueba si la lista esta vacia
+int ListaEVacia(ListaE lista){ return (lista == NULL); }
+
+//Funcion para listar los equipos existentes
+void Listar_equipo(ListaE lista){
+    pEquipos auxiliar;
+    auxiliar = lista;
+    // Si la lista de usuarios esta vacia
+    if(ListaEVacia(lista)){ printf("-Lista de equipos vacia\n");
+    }else{
+        printf("-Lista de equipos:\n");
+        // Avanzamos hasta el último elemento
+        while(auxiliar){
+            if(auxiliar->id <10){
+                printf("0%d-%s\n",auxiliar->id,auxiliar->nombre);
+            }else{
+                printf("%d-%s\n",auxiliar->id,auxiliar->nombre);
+            }
+            auxiliar = auxiliar->siguiente;
+        }
     }
 }
