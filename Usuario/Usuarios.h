@@ -17,7 +17,7 @@ typedef T_usuario *ListaU;
 
 //Declaraciones de funciones
 void Leer_user(ListaU*);
-int ListaVacia(ListaU);
+int ListaUVacia(ListaU);
 void Nuevo_user(ListaU*,int,char*,char*,char*,char*);
 void Alta_user(ListaU*);
 int Login_user(ListaU*);
