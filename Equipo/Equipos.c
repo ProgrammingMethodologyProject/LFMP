@@ -103,6 +103,7 @@ void Localizar_equipo(ListaE *lista){
             printf("-Equipo modificado:\n");
             printf("%d-%s\n",auxiliar->id,auxiliar->nombre);
         }
+    }
 }
 
 //Funcion para eliminar un usuario de la lista
