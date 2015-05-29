@@ -5,7 +5,7 @@
 //Estructuras para almacenar los datos de los Usuarios
 typedef struct {
     int id;
-    char *nombre;
+    char nombre[20];
     char *perfil;
     char user[6];
     char pass[9];
@@ -22,7 +22,7 @@ void Nuevo_user(ListaU*,int,char*,char*,char*,char*);
 void Alta_user(ListaU*);
 int Login_user(ListaU*);
 int Comprobar_user(ListaU*,char*,char*);
-void Listar_user(ListaU);
+void Listar_user(ListaU*);
 void Localizar_user(ListaU*);
 void Eliminar_user(ListaU*);
 
