@@ -5,7 +5,7 @@
 //Estructuras para almacenar los datos de los Equipos
 typedef struct {
     int id;
-    char *nombre;
+    char nombre[20];
     struct T_equipo *siguiente;
 }T_equipo;
 
@@ -16,7 +16,7 @@ typedef T_equipo *ListaE;
 void Leer_equipo(ListaE*);
 void Nuevo_equipo(ListaE*,int,char*);
 int ListaEVacia(ListaE);
-void Listar_equipo(ListaE);
+void Listar_equipo(ListaE*);
 void Localizar_equipo(ListaE*);
 void Eliminar_equipo(ListaE*);
 
