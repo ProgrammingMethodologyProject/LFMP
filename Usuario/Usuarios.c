@@ -289,6 +289,12 @@ void Eliminar_user(ListaU *lista){
             anterior = *lista; // Para colocar los ID
         }else{
             anterior->siguiente = auxiliar->siguiente;
+            anterior = anterior->siguiente; // Para colocar los ID
+        }
+        while(anterior){ //Reorganiza los Id correctamente
+            anterior->id = id;
+            anterior = anterior->siguiente;
+            id++;
         }
         free(auxiliar);
         printf("-Usuario eliminado.");
