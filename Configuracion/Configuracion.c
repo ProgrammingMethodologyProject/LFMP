@@ -18,7 +18,6 @@ void Leer_config(ListaC *lista){
         while((fscanf(fichC,"%d-",&id))!=EOF){ // Numero maximo por equipos
             fscanf(fichC,"%d-",&presupuesto); // Presupuesto por defecto
             fscanf(fichC,"%d",&max_players); // Numero maximo de jugadores por equipo
-            //printf(":%d:%d:%d:\n",id,presupuesto,jugadores);
             Nueva_config(lista,id,presupuesto,max_players);
         }
         fclose(fichC);
@@ -57,8 +56,9 @@ void Nueva_config(ListaC *lista,int id,int presupuesto,int max_players){
 int ListaCVacia(ListaC lista){ return (lista == NULL); }
 
 //Funcion para mostrar la configuracion
-void Listar_config(ListaC lista){
+void Listar_config(ListaC *lista){
     pConfig auxiliar;
+    auxiliar = (pConfig)malloc(sizeof(T_config));
     auxiliar = lista;
     // Si la lista esta vacia
     if(ListaCVacia(lista)){ printf("-Campo de configuracion vacio\n");
@@ -66,7 +66,9 @@ void Listar_config(ListaC lista){
         printf("-Configuracion:\n");
         // Avanzamos hasta el último elemento
         while(auxiliar){
-            printf("Nº maximo equipos: %d\nPresupuesto defecto: %d\nNº maximo jugadores equipos: %d\n",auxiliar->id,auxiliar->presupuesto,auxiliar->max_players);
+            printf("-Num. maximo equipos: %d\n",auxiliar->id);
+            printf("-Presupuesto defecto: %d\n",auxiliar->presupuesto);
+            printf("-Num. maximo jugadores equipos: %d\n",auxiliar->max_players);
             auxiliar = auxiliar->siguiente;
         }
     }
@@ -75,9 +77,11 @@ void Listar_config(ListaC lista){
 //Funcion para localizar un equipo existente
 void Localizar_config(ListaC *lista,int opc){
     int id,presupuesto,max_players;
+    
     pConfig auxiliar;
     auxiliar = (pConfig)malloc(sizeof(T_config));
     if(auxiliar  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
+    
     auxiliar = *lista;
     // Si la lista esta vacia
     if(ListaCVacia(auxiliar)){
@@ -85,26 +89,40 @@ void Localizar_config(ListaC *lista,int opc){
     }else{
         if(auxiliar){
             if(opc == 1){
-                printf("-Total equipos: %d\n",auxiliar->id);
-                printf("-Nuevo total: ");
+                printf("-Total equipos: %d\n-Nuevo total: ",auxiliar->id);
                 scanf("%d",&id);
                 auxiliar->id = id;
                 printf("-Numero maximo de equipos (%d) actualizado\n",auxiliar->id);
             }
             if(opc == 2){
-                printf("-Presupuesto: %d\n",auxiliar->presupuesto);
-                printf("-Nuevo presupuesto: ");
+                printf("-Presupuesto: %d\n-Nuevo presupuesto: ",auxiliar->presupuesto);
                 scanf("%d",&presupuesto);
                 auxiliar->presupuesto = presupuesto;
                 printf("-Presupuesto por defecto (%d) actualizado\n",auxiliar->presupuesto);
             }
             if(opc == 3){
-                printf("-Jugadores por equipo: %d\n",auxiliar->max_players);
-                printf("-Nuevo total: ");
+                printf("-Jugadores por equipo: %d\n-Nuevo total: ",auxiliar->max_players);
                 scanf("%d",&max_players);
                 auxiliar->max_players = max_players;
                 printf("-Numero maximo de jugadores por equipo (%d) actualizado\n",auxiliar->max_players);
             }
+        }
+    }
+}
+
+//Funcion que actualiza el fichero Configuracion.txt
+void Update_config(ListaC *lista){
+    pConfig configuracion = *lista;
+
+    FILE *fichC;
+    fichC=fopen("Configuracion.txt","w");
+    while(configuracion){
+        if(!(configuracion->siguiente)){
+            fprintf(fichC,"%d-%d-%d",configuracion->id,configuracion->presupuesto,configuracion->max_players);
+            configuracion = configuracion->siguiente;
+        }else{
+            fprintf(fichC,"%d-%d-%d\n",configuracion->id,configuracion->presupuesto,configuracion->max_players);
+            configuracion = configuracion->siguiente;
         }
     }
 }
