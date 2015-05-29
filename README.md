@@ -207,14 +207,12 @@ registrado o bien para registrarse en el sistema:
           3.- Salir del programa
           
           1.  Listar Equipos. Visualiza la lista de Equipos de primera división.
-          
           2.  Valorar Equipos. Permitirá al cronista actualizar las valoraciones de
               los futbolistas. Para ello, el cronista seleccionará un identificador de
               un equipo y posteriormente le aparecerá la lista de futbolistas de
               dicho equipo junto con su valoración actual. A continuación, el
               cronista irá seleccionando futbolistas e introduciendo sus nuevas
               valoraciones (0-10).
-              
           3.  Salir del programa. Permitirá salir del programa. En el caso de que el
               cronista haya realizado alguna valoración se deberán actualizar todas
               las puntuaciones de todas las plantillas existentes en el sistema
@@ -224,22 +222,19 @@ registrado o bien para registrarse en el sistema:
           Para el caso en el que el usuario sea un administrador debe aparecer un
           menú:
           
-          MENU ADMINISTRADOR
-          1.- Equipos
-          2.- Usuarios
-          3.- Configuración
-          4.- Salir del programa
+          MENU ADMINISTRADOR.
+          1. Equipos.
+          2. Usuarios.
+          3. Configuración.
+          4. Salir del programa.
           
           1.  Equipos. Debe mostrar un menú al administrador para listar,
               modificar, añadir y eliminar equipos de primera división al igual que
               sus futbolistas.
-          
           2.  Usuarios. Debe mostrar un menú al administrador para listar,
               modificar, añadir y eliminar usuarios del sistema.
-          
           3.  Configuración. Debe permitir editar los valores de configuración
               general del programa.
-          
           4.  Salir del programa. Permitirá salir del programa.
 
 Nota.- Como se ha comentado anteriormente, al iniciar el programa se realizará
