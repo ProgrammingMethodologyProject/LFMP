@@ -35,8 +35,8 @@ volcar de nuevo los datos actualizados a los correspondientes ficheros:
     - Identificador del equipo con dos dígitos.
     - Nombre del equipo con 20 caracteres máximo.
     
-    Ej: 01-Real Madrid
-        02-Barcelona
+    Ej: 01-Real Madrid.
+        02-Barcelona.
         ............
   * Fichero Futbolistas.txt, almacenará la información relativa a los futbolistas de
     los equipos de primera división con los siguientes campos separados por
@@ -51,10 +51,10 @@ volcar de nuevo los datos actualizados a los correspondientes ficheros:
       jornada un usuario cronista podrá modificar dichos valores en función
       de cómo considere que cada futbolista haya jugado en la realidad.
 
-    Ej: 01-01-Iker Casillas-35-0
-        02-01-Cristiano Ronaldo-90-0
-        03-02-Sergio Busquets-25-0
-        04-02-Lionel Messi-90-0
+    Ej: 01-01-Iker Casillas-35-0.
+        02-01-Cristiano Ronaldo-90-0.
+        03-02-Sergio Busquets-25-0.
+        04-02-Lionel Messi-90-0.
             ............
             
   * Fichero Usuarios.txt, almacenará la información de los usuarios del sistema con
@@ -104,9 +104,9 @@ volcar de nuevo los datos actualizados a los correspondientes ficheros:
       identificador válido de una plantilla existente en el fichero
       plantillas.txt).
 
-    Ej: 01-001
-        02-001
-        01-002
+    Ej: 01-001.
+        02-001.
+        01-002.
         ......
         
   * Fichero Configuracion.txt, almacenará los datos relativos a la configuración
@@ -123,9 +123,9 @@ volcar de nuevo los datos actualizados a los correspondientes ficheros:
 Inicialmente aparecerá un menú principal para acceso a la LFMP si el usuario está
 registrado o bien para registrarse en el sistema:
 
-  Ej: MENU LFMP
-      1.- Registro
-      2.- Acceso al sistema
+  Ej: MENU LFMP.
+      1. Registro.
+      2. Acceso al sistema.
 
   1.  Registro
       En caso de seleccionar la opción 1, se permitirá realizar un registro nuevo en el
@@ -142,13 +142,13 @@ registrado o bien para registrarse en el sistema:
       1.  Perfil Participante
           En caso de que el usuario sea un participante debe aparecer un menú:
           
-          MENU PARTICIPANTE
-          1.- Crear Plantilla
-          2.- Configurar Plantilla
-          3.- Listar Plantillas
-          4.- Eliminar Plantilla
-          5.- Ranking
-          6.- Salir del programa
+          MENU PARTICIPANTE.
+          1. Crear Plantilla.
+          2. Configurar Plantilla.
+          3. Listar Plantillas.
+          4. Eliminar Plantilla.
+          5. Ranking.
+          6. Salir del programa.
           
           1.  Crear plantilla. Debe dar la posibilidad de introducir los datos de la
               nueva plantilla. Tener en cuenta siempre que se debe respetar el
@@ -160,11 +160,11 @@ registrado o bien para registrarse en el sistema:
               configurar. Una vez seleccionada la plantilla, se mostrará en pantalla
               el presupuesto disponible y el siguiente menú:
               
-              1.- Lista de jugadores en plantilla
-              2.- Lista de jugadores disponibles
-              3.- Añadir jugador a plantilla
-              4.- Eliminar jugador de plantilla
-              5.- Volver
+              1. Lista de jugadores en plantilla.
+              2. Lista de jugadores disponibles.
+              3. Añadir jugador a plantilla.
+              4. Eliminar jugador de plantilla.
+              5. Volver.
               
               1.  Opción que visualiza la lista de jugadores que forman parte de
                   la plantilla actual junto con su valoración.
@@ -201,10 +201,10 @@ registrado o bien para registrarse en el sistema:
       2.  Perfil Cronista
           En caso de que el usuario sea un cronista debe aparecer un menú:
           
-          MENU CRONISTA
-          1.- Listar Equipos
-          2.- Valorar Equipos
-          3.- Salir del programa
+          MENU CRONISTA.
+          1. Listar Equipos.
+          2. Valorar Equipos.
+          3. Salir del programa.
           
           1.  Listar Equipos. Visualiza la lista de Equipos de primera división.
           2.  Valorar Equipos. Permitirá al cronista actualizar las valoraciones de
