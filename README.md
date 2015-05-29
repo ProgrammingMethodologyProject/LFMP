@@ -1,6 +1,6 @@
 # LIGA FANTASTICA MP
 Grupo 2 de Prácticas de la Metodología de la Programación
-
+---------------------------------------------------------
 En esta práctica se va a crear un pequeño programa de simulación de fútbol donde todos
 los datos van a estar almacenados en ficheros, garantizando la conservación de la
 información y la posibilidad de volverla a utilizar en posteriores ejecuciones del
