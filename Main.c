@@ -35,23 +35,51 @@ int main(){
                             getch(); system("cls"); op = 1; break;
                     case 2: Localizar_equipo(&l_equipos);// Modificar equipos
                             getch(); system("cls"); op = 1; break;
-                    case 3: Alta_equipo(&l_equipos);// Agregar equipos
+                    case 3: if(TotalEquipos(&l_equipos) < Configuracion(&l_config,1)){
+                                Alta_equipo(&l_equipos);// Agregar equipos
+                            }else{
+                                printf("-Limite de equipos permitidos\n");
+                            }
                             getch(); system("cls"); op = 1; break;
                     case 4: Eliminar_equipo(&l_equipos);// Eliminar equipos
                             getch(); system("cls"); op = 1; break;
                     case 5: system("cls"); op = 0; break;
                 }
             }
-            while(op == 2){ // Usuarios
+            while(op == 2){ // Futbolistas
+                switch(menu(7)){
+                    case 1: Listar_futbolista(&l_fut);// Listar futbolistas
+                            getch(); system("cls"); op = 2; break;
+                    case 2: Localizar_futbolista(&l_fut);// Modificar futbolistas
+                            getch(); system("cls"); op = 2; break;
+                    case 3: printf("-Equipo al que quieres agregar un nuevo jugador (introducir id):\n");
+                            fflush(stdin);
+                            scanf("%d",&op);
+                            if(op <= TotalEquipos(&l_equipos)){
+                                if(TotalJugadores(&l_fut,op) < Configuracion(&l_config,3)){
+                                    Alta_futbolista(&l_fut,op);// Agregar futbolista a cierto equipo
+                                }else{
+                                    printf("-Limite de jugadores para este equipo permitidos.\n");
+                                }
+                            }else{
+                                printf("-Id de equipo no encontrado\n");
+                            }
+                            getch(); system("cls"); op = 2; break;
+                    case 4: //Eliminar_futbolista(&l_fut);// Eliminar futbolistas
+                            getch(); system("cls"); op = 2; break;
+                    case 5: system("cls"); op = 0; break;
+                }
+            }
+            while(op == 3){ // Usuarios
                 switch(menu(5)){
                     case 1: Listar_user(&l_usuarios); // Listar usuarios
-                            getch(); system("cls"); op = 2; break;
+                            getch(); system("cls"); op = 3; break;
                     case 2: Localizar_user(&l_usuarios);// Modificar usuarios
-                            getch(); system("cls"); op = 2; break;
+                            getch(); system("cls"); op = 3; break;
                     case 3: Alta_user(&l_usuarios);// Agregar usuarios
-                            getch(); system("cls"); op = 2; break;
+                            getch(); system("cls"); op = 3; break;
                     case 4: Eliminar_user(&l_usuarios);// Eliminar usuarios
-                            getch(); system("cls"); op = 2; break;
+                            getch(); system("cls"); op = 3; break;
                     case 5: system("cls"); op = 0; break;
                 }
             }
@@ -96,6 +124,6 @@ int main(){
             }
         }
     }
-    Update_equipos(&l_equipos); Update_user(&l_usuarios); Update_config(&l_config); // Actualiza los ficheros
+    Update_equipos(&l_equipos); Update_user(&l_usuarios); Update_config(&l_config); Update_futbolistas(&l_fut);// Actualiza los ficheros
 return 0;
 }
