@@ -126,3 +126,21 @@ void Update_config(ListaC *lista){
         }
     }
 }
+
+//Funcion que devuelve el campo especificado
+int Configuracion(ListaC *lista,int op){
+    pConfig auxiliar;
+    auxiliar = (pConfig)malloc(sizeof(T_config));
+    auxiliar = *lista;
+    // Si la lista esta vacia
+    if(ListaCVacia(auxiliar)){
+            return 0;
+    }else{
+        while(auxiliar){
+            if(op == 1){ return auxiliar->id; }
+            if(op == 2){ return auxiliar->presupuesto; }
+            if(op == 3){ return auxiliar->max_players; }
+            auxiliar = auxiliar->siguiente;
+        }
+    }
+}
