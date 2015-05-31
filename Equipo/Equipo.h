@@ -16,8 +16,11 @@ typedef T_equipo *ListaE;
 void Leer_equipo(ListaE*);
 void Nuevo_equipo(ListaE*,int,char*);
 int ListaEVacia(ListaE);
+void Alta_equipo(ListaE*);
 void Listar_equipo(ListaE*);
 void Localizar_equipo(ListaE*);
 void Eliminar_equipo(ListaE*);
+void Update_equipos(ListaE*);
+int TotalEquipos(ListaE*);
 
 #endif //_EQUIPOS_H_
