@@ -16,6 +16,7 @@ typedef T_config *ListaC;
 void Leer_config(ListaC*);
 void Nueva_config(ListaC*,int,int,int);
 int ListaCVacia(ListaC);
-void Listar_config(ListaC);
+void Listar_config(ListaC*);
 void Localizar_config(ListaC*,int);
+int Configuracion(ListaC*,int);
 #endif //_CONFIGURACION_H_
