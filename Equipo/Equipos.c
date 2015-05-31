@@ -192,3 +192,21 @@ void Update_equipos(ListaE *lista){
     }
     fclose(fichE);
 }
+
+//Funcion que devuelve el numero total de equipos
+int TotalEquipos(ListaE *lista){
+    int aux=0;
+    pEquipos auxiliar;
+    auxiliar = (pEquipos)malloc(sizeof(T_equipo));
+    if(auxiliar  == NULL){ fprintf(stderr,"Error de asignacion de memoria"); exit(1); }
+
+    auxiliar = *lista;
+    if(auxiliar != NULL){
+        aux++;
+        while(auxiliar->siguiente != NULL){
+                auxiliar = auxiliar->siguiente;
+                aux++;
+        }
+    }
+    return aux;
+}
