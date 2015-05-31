@@ -40,20 +40,24 @@ int navegador(int n, int cont){
         printf("\t|\t%c 3 SALIR\t\t\t|\n",c);
         printf("\t+---------------------------------------+\n");
         return 2;
-    }else if(cont==1){
-        char a=' ',b=' ',c=' ',d=' ';
+    }
+    if(cont==1){
+        char a=' ',b=' ',c=' ',d=' ',e=' ';
         if(n==0){a='*';}
         if(n==1){b='*';}
         if(n==2){c='*';}
         if(n==3){d='*';}
+        if(n==4){e='*';}
         printf("\n\t+---------> MENU ADMINSTRADOR <---------+\n");
         printf("\t|\t%c 1 EQUIPOS\t\t\t|\n",a);
-        printf("\t|\t%c 2 USUARIOS\t\t\t|\n",b);
-        printf("\t|\t%c 3 CONFIGURACION\t\t|\n",c);
-        printf("\t|\t%c 4 SALIR\t\t\t|\n",d);
+        printf("\t|\t%c 2 FUTBOLISTAS\t\t\t|\n",b);
+        printf("\t|\t%c 3 USUARIOS\t\t\t|\n",c);
+        printf("\t|\t%c 4 CONFIGURACION\t\t|\n",d);
+        printf("\t|\t%c 5 SALIR\t\t\t|\n",e);
         printf("\t+---------------------------------------+\n");
-        return 3;
-    }else if(cont==2){
+        return 4;
+    }
+    if(cont==2){
         char a=' ',b=' ',c=' ';
         if(n==0){a='*';}
         if(n==1){b='*';}
@@ -64,7 +68,8 @@ int navegador(int n, int cont){
         printf("\t|\t%c 3 SALIR\t\t\t|\n",c);
         printf("\t+---------------------------------------+\n");
         return 2;
-    }else if(cont==3){
+    }
+    if(cont==3){
         char a=' ',b=' ',c=' ',d=' ',e=' ',f=' ';
         if(n==0){a='*';}
         if(n==1){b='*';}
@@ -81,5 +86,69 @@ int navegador(int n, int cont){
         printf("\t|\t%c 6 SALIR\t\t\t|\n",f);
         printf("\t+---------------------------------------+\n");
         return 5;
+    }
+    if(cont==4){
+        char a=' ',b=' ',c=' ',d=' ',e=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        if(n==3){d='*';}
+        if(n==4){e='*';}
+        printf("\n\t+-----------> MENU EQUIPOS <------------+\n");
+        printf("\t|\t%c 1 LISTAR EQUIPOS\t\t|\n",a);
+        printf("\t|\t%c 2 MODIFICAR EQUIPOS\t\t|\n",b);
+        printf("\t|\t%c 3 AGREGAR EQUIPOS\t\t|\n",c);
+        printf("\t|\t%c 4 ELIMINAR EQUIPOS\t\t|\n",d);
+        printf("\t|\t%c 5 VOLVER\t\t\t|\n",e);
+        printf("\t+---------------------------------------+\n");
+        return 4;
+    }
+    if(cont==5){
+        char a=' ',b=' ',c=' ',d=' ',e=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        if(n==3){d='*';}
+        if(n==4){e='*';}
+        printf("\n\t+-----------> MENU USUARIOS <-----------+\n");
+        printf("\t|\t%c 1 LISTAR USUARIOS\t\t|\n",a);
+        printf("\t|\t%c 2 MODIFICAR USUARIOS\t\t|\n",b);
+        printf("\t|\t%c 3 AGREGAR USUARIOS\t\t|\n",c);
+        printf("\t|\t%c 4 ELIMINAR USUARIOS\t\t|\n",d);
+        printf("\t|\t%c 5 VOLVER\t\t\t|\n",e);
+        printf("\t+---------------------------------------+\n");
+        return 4;
+    }
+    if(cont==6){
+        char a=' ',b=' ',c=' ',d=' ',e=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        if(n==3){d='*';}
+        if(n==4){e='*';}
+        printf("\n\t+-----------> MENU OPCIONES <-----------+\n");
+        printf("\t|\t%c 1 LISTAR CONFIGURACION\t|\n",a);
+        printf("\t|\t%c 2 NUM EQUIPOS\t\t\t|\n",b);
+        printf("\t|\t%c 3 PRESUPUESTO\t\t\t|\n",c);
+        printf("\t|\t%c 4 NUM JUGADORES\t\t|\n",d);
+        printf("\t|\t%c 5 VOLVER\t\t\t|\n",e);
+        printf("\t+---------------------------------------+\n");
+        return 4;
+    }
+    if(cont==7){
+        char a=' ',b=' ',c=' ',d=' ',e=' ';
+        if(n==0){a='*';}
+        if(n==1){b='*';}
+        if(n==2){c='*';}
+        if(n==3){d='*';}
+        if(n==4){e='*';}
+        printf("\n\t+-----------> MENU FUTBOLISTAS <--------+\n");
+        printf("\t|\t%c 1 LISTAR FUTBOLISTAS\t\t|\n",a);
+        printf("\t|\t%c 2 MODIFICAR FUTBOLISTAS\t|\n",b);
+        printf("\t|\t%c 3 AGREGAR FUTBOLISTAS\t\t|\n",c);
+        printf("\t|\t%c 4 ELIMINAR FUTBOLISTAS\t|\n",d);
+        printf("\t|\t%c 5 VOLVER\t\t\t|\n",e);
+        printf("\t+---------------------------------------+\n");
+        return 4;
     }
 }
