@@ -5,6 +5,7 @@
 #include "configuracion.h"
 #include "jugadores_plantillas.h"
 #include "plantilla.h"
+#include "usuarios.h"
 
 
 //Funcion para crear plantilla (SIN TERMINAR)
@@ -145,20 +146,81 @@ void Jugadores_Plantilla(T_plantilla *plantilla)
 }
 
 //lista jugadores disponibles
+
+//año pasado
 void Jugadores_Disp(T_plantilla *plantilla)
 {
+    stock = (T_plantilla *) calloc(0, sizeof(T_plantilla));
+	FILE *fichP;
+	int idx = 0;
+    char cadena[15];
+	if((file = fopen("plantilla.txt" , "r")) == NULL){
+		printf("ERROR: No existe el archivo 'plantilla.txt'\n");
+	}else{
+        char ident[3] , c_art[6], c_alm[3], cant[7];
+        while(fgets(str, 20, file) != NULL){
+            T_Stock a;
+            if(sscanf(str, "%[^-]-%s", c_art, cadena ) == 2)
+            {
+                if(sscanf(cadena, "%[^-]-%s", c_alm, cant ) == 2)
+                {
+                    a.c_articulo = atoi(c_art);
+                    a.c_almacen = atoi(c_alm);
+                    a.cantidad = atoi(cant);
+                }
+            }
+            else
+                printf("Error de lectura\n");
+            stock = (T_Stock *) realloc(stock, (idx+1)*sizeof(T_Almacen));
+            stock[idx] = a;
+            idx++;
+        }
+        fclose(file);
+        tam = idx;
+    }
 
 }
 
 //añadir jugador a plantilla
 void Añadir_Jugador(T_plantilla *plantilla, T_Futbolista *fut)
 {
+    int cod;
+    char des[20];
+    do{
+        printf("\nIntroduzca el codigo del jugador:  \n");
+        scanf("%d", &cod);
+        fflush(stdin);
+    }while(Jugadores_Disp(cod) || cod < 0 || cod > 99999);
+    fut = (T_Futbolista *) realloc(fut, (tam+1)*sizeof(T_Futbolista));
+    fut[tam].identificador = cod;
+    tam++;
 
 }
 
 //eliminar
-void Eliminar_Jugador(T_plantilla *plantilla)
+void Eliminar_Jugador(T_Futbolista *fut)
 {
+    int cod, i, aux;
+
+    printf("\nIntroduzca el identificador del jugador:  \n");
+    scanf("%d", &cod);
+    fflush(stdin);
+
+    for(i=0 ; i<tam ; i++){
+        if(fut[i].identificador == cod) {
+            aux = 1;
+            i++;
+        }
+        if(aux == 1)
+            fut[i-1] = fut[i];
+        else
+            fut[i] = fut[i];
+    }
+    if(aux == 1)
+    {
+        fut = (T_Futbolista *) realloc(fut, (--tam)*sizeof(T_Futbolista));
+        borrar_stock(cod,0);
+    }
 
 }
 
@@ -192,5 +254,21 @@ void Eliminar_Plantilla(T_plantilla *plantilla)
 
 void Ranking(T_plantilla *plantilla)
 {
+    int i,j, caux;
+    char daux[10];
+    for(i=1 ; i<=tam ; i++){
+        for(j=0 ; j<=tam-2 ; j++){  //tam = tamaño maximo de la plantilla
+            if(plantilla[j].codigo > plantilla[j+1].codigo){
+                caux = plantilla[j].codigo;
+                strcpy(daux, plantilla[j].descripcion);
+
+                plantilla[j].codigo = plantilla[j+1].codigo;
+                strcpy(plantilla[j].descripcion, plantilla[j+1].descripcion);
+
+                plantilla[j+1].codigo = caux;
+                strcpy(plantilla[j+1].descripcion, daux);
+            }
+        }
+    }
 
 }
